@@ -4,6 +4,7 @@
   --color-primary-light: #f3f3f3;
   --color-secondary-dark: #6a3eed;
   --color-primary-violet: #9f7fe5;
+  --color-secondary-grey: #191a23;
   --black: #000;
   --white: #fff;
   --bp-mobile: 48rem;
@@ -16,12 +17,12 @@ html {
 }
 
 body {
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk";
   font-size: 1.8rem;
   font-weight: 400;
   line-height: normal;
   font-style: normal;
-  background: url('../images/main.png');
+  background: url("../images/main.png");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -60,7 +61,6 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
 .hidden {
@@ -151,7 +151,7 @@ img {
 .sync-container {
   display: flex;
   gap: 4rem;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .dev-item {
@@ -302,7 +302,13 @@ img {
   gap: 4rem;
 }
 
+.visible-products {
+  flex-direction: column;
+}
+
 .mystic-item {
+  display: flex;
+  flex-direction: column;
   padding: 5rem;
   justify-content: space-between;
   align-items: flex-start;
@@ -313,9 +319,7 @@ img {
   box-shadow: 0rem 0.5rem 0rem 0rem var(--color-secondary-dark);
   flex: 1;
   height: 100%;
-  display: flex;
   box-sizing: border-box;
-  flex-direction: column;
 }
 
 .spiritual-item {
@@ -326,12 +330,68 @@ img {
   align-items: flex-start;
   align-self: stretch;
   border-radius: 4.5rem;
-  border: 0.2rem solid --color-primary-violet;
+  border: 0.2rem solid var(--color-primary-violet);
   background: #5f4c89;
-  box-shadow: 0rem 0.5rem 0rem 0rem --color-primary-violet;
+  box-shadow: 0rem 0.5rem 0rem 0rem var(--color-primary-violet);
   flex: 1;
   height: 100%;
   box-sizing: border-box;
+}
+
+.another-item {
+  display: flex;
+  padding: 0.4rem 6rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 4.5rem;
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0.1rem solid var(--color-secondary-grey);
+  background: var(--color-primary-light);
+  box-shadow: 0rem 0.5rem 0rem 0rem var(--color-secondary-grey);
+}
+
+.another-item.hidden {
+  display: none;
+}
+
+.brands-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toggle-icon {
+  height: 58px;
+  width: auto;
+  cursor: pointer;
+}
+
+.brands-divider {
+  background-color: var(--color-primary-light);
+  height: 1px;
+}
+
+.brands-text {
+  color: var(--color-primary-light);
+}
+
+.brands-logo.hidden {
+  display: none;
+}
+
+.visible-products .mystic-item,
+.visible-products .spiritual-item,
+.visible-products .another-item {
+  width: 100%;
+}
+
+.visible-products .another-item,
+.visible-products .toggle-icon {
+  display: block;
 }
 
 .product-link {
@@ -369,6 +429,8 @@ img {
 
 .contact-info {
   margin-bottom: 0;
+  max-width: 72rem;
+  text-align: center;
 }
 
 /* Address */
@@ -379,12 +441,12 @@ img {
 }
 
 .address-container {
-  background: url('../images/contact-bg-desktop.png');
+  background: url("../images/contact-bg-desktop.png");
   background-repeat: no-repeat;
   background-position: center top;
   display: flex;
   flex-direction: column;
-  padding: 6rem 10rem 8rem 10rem;
+  padding: 6rem 10rem 5rem 10rem;
   justify-content: center;
   align-items: center;
   gap: 2.7rem;
@@ -583,6 +645,22 @@ img {
   background: var(--color-brand-light);
 }
 
+.privacy-policy {
+  background-color: var(--white);
+  background-image: none;
+}
+
+.privacy-list {
+  list-style-type: disc;
+  padding-left: 2rem;
+  padding-bottom: 1.8rem;
+}
+
+.policy-links {
+  color: var(--black);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .header-menu {
     display: none;
@@ -601,7 +679,7 @@ img {
   }
 
   .address-container {
-    background: url('../images/contact-bg-mobile.svg');
+    background: url("../images/contact-bg-mobile.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -634,6 +712,10 @@ img {
     gap: 3rem;
   }
 
+  .sync-container {
+    flex-direction: column;
+  }
+
   .img-bg {
     display: none;
   }
@@ -657,6 +739,26 @@ img {
 
   .contact-info {
     text-align: center;
+  }
+
+  .address-container {
+    padding: 4rem;
+  }
+
+  .brands-divider {
+    display: none !important;
+  }
+
+  .toggle-icon {
+    display: none !important;
+  }
+
+  .hidden-info {
+    display: block !important;
+  }
+
+  .another-item {
+    display: none !important;
   }
 
   .footer-container {
