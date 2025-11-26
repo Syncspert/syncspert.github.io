@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysticsense Content Copy Library</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for better readability and fixed sidebar */
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; }
+        .content-area { max-width: 100%; margin-left: 20rem; padding: 1.5rem; }
+        .copy-item { border: 1px solid #e5e7eb; padding: 1rem; border-radius: 0.5rem; background-color: white; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); margin-bottom: 1.5rem; }
+        .copy-text { 
+            white-space: pre-wrap; 
+            font-size: 0.95rem; 
+            padding: 0.75rem; 
+            border: 1px dashed #d1d5db; 
+            background-color: #f9fafb; 
+            border-radius: 0.375rem;
+            cursor: text;
+        }
+        .nav-link.active {
+            background-color: #7d5a8c !important; 
+            color: white !important;
+            font-weight: 700;
+        }
+        /* Adjusted padding for fixed header and sticky nav targets */
+        .content-section-title {
+            padding-top: 5rem;
+            margin-top: -5rem;
+        }
+        .content-type-title {
+            padding-top: 5rem;
+            margin-top: -5rem;
+        }
+        /* Refined Timing Note Style */
+        .timing-note {
+            font-style: italic;
+            border-left: 4px solid #4b5563; /* Dark Grey Color */
+            padding: 8px 12px;
+            margin-bottom: 1.5rem;
+            background-color: #e5e7eb; /* Light Grey Background */
+            color: #1f2937; /* Dark text */
+            border-radius: 0.25rem;
+        }
+
+        /* Ensure smooth scrolling when clicking nav links */
+        html { scroll-behavior: smooth; }
+
+        /* Custom Copy Button Style: Smaller and more compact */
+        .copy-btn {
+            background-color: #7d5a8c;
+            transition: background-color 0.15s ease-in-out;
+            /* Compact sizing */
+            padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .copy-btn:hover {
+            background-color: #5d3f6a;
+        }
+        .nested-nav {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            border-left: 2px solid #5d3f6a;
+            /* Added transition for smoother collapse */
+            transition: max-height 0.3s ease-in-out;
+            overflow: hidden;
+            max-height: 0; /* Default collapsed state */
+        }
+        .nested-nav.expanded {
+            max-height: 500px; /* Large enough value to show all content */
+        }
+        .nav-toggle-btn {
+            float: right;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .nav-toggle-btn.rotated {
+            transform: rotate(90deg);
+        }
+        .link-container {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            background-color: #f9fafb;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .link-text {
+            word-break: break-all;
+            margin-right: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Linktree Specific Styling */
+        .linktree-card {
+            border: 2px solid #5d3f6a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background-color: #fff;
+        }
+        .linktree-item {
+            padding: 1rem;
+            background-color: #f0f0f5;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .linktree-item:hover {
+            background-color: #e5e5eb;
+        }
+        /* Style for the Access Button/Link */
+        .access-btn {
+            display: inline-block;
+            background-color: #4f46e5; /* Indigo color */
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .access-btn:hover {
+            background-color: #4338ca;
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .content-area {
+                margin-left: 0;
+                padding-top: 5rem;
+            }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                margin-bottom: 1rem;
+            }
+            header {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sticky Header -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-20 px-6 py-4">
+        <h1 class="text-2xl font-bold text-gray-800">Mysticsense Content Library</h1>
+        <p class="text-sm text-gray-500">Copy and paste CTAs, descriptions, and affiliate links.</p>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="fixed top-[4.5rem] left-0 h-[calc(100vh-4.5rem)] w-80 bg-gray-800 text-white p-6 overflow-y-auto z-10">
+        <div class="sticky top-0">
+            <h3 class="text-xl font-semibold mb-4 text-indigo-300">Content Sections</h3>
+            <div id="nav-links" class="space-y-4">
+
+                <!-- Expert Linktree -->
+                <div>
+                    <a href="#linktree" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150">🎯 Linktree Expert Advice</a>
+                </div>
+
+                <!-- Universal Topics -->
+                <div>
+                    <a href="#universal" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-universal')">
+                        ⭐ Universal Topics
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-universal" class="nested-nav space-y-1">
+                        <a href="#universal-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#universal-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#universal-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#universal-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+
+                <!-- Love -->
+                <div>
+                    <a href="#love" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-love')">
+                        ❤️ Love
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-love" class="nested-nav space-y-1">
+                         <a href="#love-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#love-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#love-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#love-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+
+                <!-- Career & Money -->
+                 <div>
+                    <a href="#career" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-career')">
+                        💼 Career & Money
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-career" class="nested-nav space-y-1">
+                        <a href="#career-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#career-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#career-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#career-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+                
+                <!-- Mediumship & Pets -->
+                <div>
+                    <a href="#mediumship" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-mediumship')">
+                        🔮 Mediumship & Pets
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-mediumship" class="nested-nav space-y-1">
+                        <a href="#mediumship-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#mediumship-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#mediumship-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#mediumship-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+
+                <!-- Tarot -->
+                <div>
+                    <a href="#tarot" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-tarot')">
+                        ⚖️ Tarot
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-tarot" class="nested-nav space-y-1">
+                        <a href="#tarot-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#tarot-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#tarot-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#tarot-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+                
+                <!-- Astrology -->
+                <div>
+                    <a href="#astrology" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-astrology')">
+                        🌌 Astrology
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-astrology" class="nested-nav space-y-1">
+                        <a href="#astrology-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#astrology-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#astrology-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#astrology-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+
+                <!-- Numerology -->
+                <div>
+                    <a href="#numerology" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-numerology')">
+                        🔢 Numerology
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-numerology" class="nested-nav space-y-1">
+                         <a href="#numerology-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#numerology-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#numerology-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#numerology-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+                
+                <!-- Past Life Readings -->
+                <div>
+                    <a href="#pastlife" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150" onclick="toggleNav(event, 'nested-pastlife')">
+                        ⏳ Past Life Readings
+                        <span class="nav-toggle-btn">▶</span>
+                    </a>
+                    <div id="nested-pastlife" class="nested-nav space-y-1">
+                        <a href="#pastlife-links" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Recommended Links</a>
+                        <a href="#pastlife-titles" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short CTAs (Titles)</a>
+                        <a href="#pastlife-short-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Short Descriptions</a>
+                        <a href="#pastlife-long-desc" class="nav-link block px-3 py-1 text-sm rounded-lg hover:bg-gray-600 transition duration-150">Long Descriptions</a>
+                    </div>
+                </div>
+
+                <!-- Media Assets -->
+                <a href="#media-assets" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150">🎬 Media Assets</a>
+
+                <!-- About Mysticsense -->
+                <a href="#about" class="nav-link block px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition duration-150">ℹ️ About Mysticsense</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-area pt-20">
+
+        <!-- Reusable Component function for Copy Items -->
+        <script>
+            // Function to safely create HTML element with content
+            function createCopyItem(title, text, id) {
+                const html = `
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">${title}</h4>
+                    <div id="${id}" class="copy-text">${text}</div>
+                    <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('${id}', this)">Copy</button>
+                `;
+                const container = document.createElement('div');
+                container.className = 'copy-item';
+                container.innerHTML = html;
+                return container;
+            }
+
+            // Function to append items to a section
+            function populateSection(sectionId, data) {
+                const section = document.getElementById(sectionId);
+                data.forEach(item => {
+                    section.appendChild(createCopyItem(item.title, item.text, item.id));
+                });
+            }
+        </script>
+
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 0: LINKTREE EXPERT ADVICE (High-Priority Copy) -->
+        <!-- ========================================================================= -->
+        <section id="linktree" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">🎯 Linktree Expert Advice (High-Priority Copy)</h2>
+            <p class="text-gray-600 mb-4">Use these combinations for maximum click-through rate on platforms like Linktree, Instagram Bio, or top-level popups where space is limited.</p>
+            
+            
+
+            <div class="linktree-card">
+                <h3 class="text-xl font-semibold mb-4 text-indigo-700">Option 1: Universal Offer (Combined)</h3>
+                
+                
+                <div class="link-container flex-col items-start bg-white shadow-md rounded-lg p-3 mt-4">
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">LINK 1: Main Offer (5 Mins FREE)</h4>
+                    <div id="lt-1-cta" class="copy-text w-full mb-3">🔮 Start Your Reading: First 5 Minutes are FREE!</div>
+                    <div id="lt-1-link" class="link-text font-mono w-full mb-3 text-indigo-500">https://www.mysticsense.com/5minutesfree/#a_aid=[REF_ID]</div>
+                    <div class="w-full flex space-x-2">
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-1-cta', this)">Copy CTA Text</button>
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-1-link', this)">Copy URL</button>
+                    </div>
+                </div>
+
+                <div class="link-container flex-col items-start bg-white shadow-md rounded-lg p-3 mt-4">
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">LINK 2: Love Insight</h4>
+                    <div id="lt-2-cta" class="copy-text w-full mb-3">❤️ Confused About Love? Get 5 FREE Minutes of Insight!</div>
+                    <div id="lt-2-link" class="link-text font-mono w-full mb-3 text-indigo-500">https://www.mysticsense.com/Love-Psychics/#a_aid=[REF_ID]</div>
+                    <div class="w-full flex space-x-2">
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-2-cta', this)">Copy CTA Text</button>
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-2-link', this)">Copy URL</button>
+                    </div>
+                </div>
+                
+                <div class="link-container flex-col items-start bg-white shadow-md rounded-lg p-3 mt-4">
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">LINK 3: Forecast/Future</h4>
+                    <div id="lt-3-cta" class="copy-text w-full mb-3">⏰ Need Answers FAST? Get a Future Forecast (5 Mins FREE).</div>
+                    <div id="lt-3-link" class="link-text font-mono w-full mb-3 text-indigo-500">https://www.mysticsense.com/Astrology-Readings/#a_aid=[REF_ID]</div>
+                    <div class="w-full flex space-x-2">
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-3-cta', this)">Copy CTA Text</button>
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-3-link', this)">Copy URL</button>
+                    </div>
+                </div>
+                 <div class="link-container flex-col items-start bg-white shadow-md rounded-lg p-3 mt-4">
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">LINK 4: Clarity/Future</h4>
+                    <div id="lt-4-cta" class="copy-text w-full mb-3">❓ Life Questions? Connect with a Top Psychic for FREE!</div>
+                    <div id="lt-4-link" class="link-text font-mono w-full mb-3 text-indigo-500">https://www.mysticsense.com/5minutesfree/#a_aid=[REF_ID]</div>
+                    <div class="w-full flex space-x-2">
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-4-cta', this)">Copy CTA Text</button>
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-4-link', this)">Copy URL</button>
+                    </div>
+                </div>
+                <!-- NEW CTA: New Year Look Ahead -->
+                <div class="link-container flex-col items-start bg-white shadow-md rounded-lg p-3 mt-4">
+                    <h4 class="text-md font-semibold mb-2 text-gray-700">LINK 5: New Year Forecast</h4>
+                    <div id="lt-5-cta" class="copy-text w-full mb-3">🎉 What will this new year look like for me? Get a Full Forecast!</div>
+                    <div id="lt-5-link" class="link-text font-mono w-full mb-3 text-indigo-500">https://www.mysticsense.com/Astrology-Readings/#a_aid=[REF_ID]</div>
+                    <div class="w-full flex space-x-2">
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-5-cta', this)">Copy CTA Text</button>
+                        <button class="copy-btn py-1.5 px-3 rounded transition duration-150 w-1/2" onclick="copyContent('lt-5-link', this)">Copy URL</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 1: UNIVERSAL TOPICS -->
+        <!-- ========================================================================= -->
+        <section id="universal" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">⭐ Universal Topics (General Psychic)</h2>
+            <p class="text-gray-600 mb-2">This content promotes the full range of Mysticsense services by focusing on overall clarity, trust, and the 5 FREE Minutes offer.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Use this content year-round, especially during major self-reflection periods like the New Year or when promoting Trust & Guarantees.
+            </p>
+            
+            <h3 id="universal-links" class="text-xl font-semibold mb-4 mt-8 text-indigo-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="u-link-1" class="link-text font-mono">https://www.mysticsense.com/5minutesfree/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-link-1', this)">Copy Link</button>
+                </div>
+                <div class="link-container">
+                    <span id="u-link-2" class="link-text font-mono">https://www.mysticsense.com/best-value/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-link-2', this)">Copy Link</button>
+                </div>
+                <div class="link-container">
+                    <span id="u-link-3" class="link-text font-mono">https://www.mysticsense.com/psychics/?page=1&psychic_status=1&sort=psychic_status_#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-link-3', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="universal-titles" class="text-xl font-semibold mb-2 text-indigo-700 content-type-title">Short CTA - Titles Ideas (Universal)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+
+            <div id="universal-short-ctas">
+                <!-- NEW CTA: New Year Look Ahead -->
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: New Year Look Ahead</h4><div id="u-cta-11" class="copy-text">🎉 What will this new year look like for me? 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-11', this)">Copy</button></div>
+                
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: Tarot/Cards Focus</h4><div id="u-cta-6" class="copy-text">🃏 What the cards have to tell you? 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-6', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: Astrology/Universe Message</h4><div id="u-cta-7" class="copy-text">🌌 What message does the universe have for you? FREE 5 Min.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-7', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: Explore Insights</h4><div id="u-cta-8" class="copy-text">✨ Explore psychic insights now - 5 min FREE</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-8', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: Access Guidance</h4><div id="u-cta-9" class="copy-text">🔑 Access accurate psychic guidance - 5 min FREE</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-9', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">New Title: Find Trusted Advice</h4><div id="u-cta-10" class="copy-text">🔍 Find trusted psychic advice - 5 min FREE</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-10', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Simple Offer</h4><div id="u-cta-1" class="copy-text">🔮 Get a Psychic Reading: 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-1', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Clarity Focus</h4><div id="u-cta-2" class="copy-text">✨ Find psychic clarity with 5 free minutes!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-2', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Overall Clarity</h4><div id="u-cta-3" class="copy-text">❓ Life Questions? Get Clarity with 5 FREE Mins! 🌠</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-3', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Trust/Guaranteed</h4><div id="u-cta-4" class="copy-text">✅ Guaranteed Insight! Your First 5 Minutes are FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-4', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Instant Access</h4><div id="u-cta-5" class="copy-text">⏰ Answer Needed? Connect 24/7! 5 FREE Minutes.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-cta-5', this)">Copy</button></div>
+            </div>
+
+            <h3 id="universal-short-desc" class="text-xl font-semibold mb-2 mt-8 text-indigo-700 content-type-title">Short Description Ideas (Universal)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (All-in-One Clarity)</h4>
+                <div id="u-desc-s-1" class="copy-text">Find clarity in any area—Love ❤️, Career 💼, or Spiritual Path—with top-rated psychics, mediums, and tarot readers on Mysticsense. Start your journey with 5 FREE minutes! ✨</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (The Risk-Free Offer)</h4>
+                <div id="u-desc-s-2" class="copy-text">Stop guessing and start knowing! 💡 Get guaranteed insight across all topics. Choose from chat, video, or phone sessions with vetted advisors. Get your FIRST 5 minutes FREE! ✅</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Comprehensive Support)</h4>
+                <div id="u-desc-s-3" class="copy-text">Unlock your intuition and get personalized guidance on any life question. Connect with trusted advisors 24/7 for illuminating insights. Book your session now for 5 FREE Minutes! 🌟</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-desc-s-3', this)">Copy</button>
+            </div>
+
+            <h3 id="universal-long-desc" class="text-xl font-semibold mb-2 mt-8 text-indigo-700 content-type-title">Long Description (Universal Topics)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 1 (General Focus & Trust-Building)</h4>
+                <div id="u-desc-l-1" class="copy-text">Stop feeling stuck and start living with direction! 🧭 Mysticsense is your trusted online platform for real-time psychic advice across ALL specialties. Whether you need an Astrology chart analyzed, Tarot guidance for your career, or Mediumship for healing, our advisors are here 24/7. We offer a variety of top-rated experts, including Psychics, Mediums, and Numerologists.
+
+Your first 5 minutes are on us! 🎁 New users and first-time callers are guaranteed 5 minutes free on their first reading. Plus, our satisfaction guarantee means you can ask for a full refund if you're not happy. Experience the safest, easiest way to get clarity. Tap the link below to start your reading with 5 FREE minutes!
+#PsychicReading #SpiritualGuidance #AskTheExperts #LifeClarity #FreeReading #Mysticsense #TrustedPsychics</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-desc-l-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 2 (Facing a Crossroads)</h4>
+                <div id="u-desc-l-2" class="copy-text">Facing a crossroads in life? Need deep clarity on love, career, or your true spiritual path? Stop guessing and start gaining guaranteed insight! ✨ Mysticsense connects you with top-rated advisors specializing in every area—from Tarot and Astrology to Mediumship and Life Path Readings. Whether you're asking:
+
+❤️ "What are their true intentions?"
+💼 "Is this the right time to change jobs?"
+🕊️ "Can I get closure after loss?"
+Our expert psychics provide the validated, reliable answers you need to move forward with confidence.
+Take the risk-free step toward spiritual clarity! New users and first-time callers are guaranteed 5 FREE minutes on their first reading via chat, phone, or video. You also get a full refund if you're not satisfied. Connect with trusted guidance 24/7!
+Tap the link below to unlock your intuition and find your answer!
+#PsychicReading #SpiritualGuidance #AskTheExperts #LifeClarity #FreeReading #Mysticsense #TrustedPsychics</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('u-desc-l-2', this)">Copy</button>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 2: LOVE -->
+        <!-- ========================================================================= -->
+        <section id="love" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">❤️ Get Your Love Readings with the Best Psychics</h2>
+            <p class="text-gray-600 mb-2">Effectively grabs attention on social posts (e.g., #love, #relationships, story times) and dedicated sites.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Highly effective around **Valentine's Day**, **End of the Year** (relationship reflection), Anniversary periods, or when posting about compatibility.
+            </p>
+            
+            <h3 id="love-links" class="text-xl font-semibold mb-4 mt-8 text-pink-600 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="l-link-1" class="link-text font-mono">https://www.mysticsense.com/Love-Psychics/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-link-1', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="love-titles" class="text-xl font-semibold mb-2 text-pink-600 content-type-title">Short CTA - Titles Ideas (Love)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+
+            <div id="love-short-ctas">
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Soulmate Focus</h4><div id="l-cta-1" class="copy-text">❤️ Is he/she "the one"? Get clarity with 5 FREE mins! ✨</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-1', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Simple Offer</h4><div id="l-cta-2" class="copy-text">❤️ Love Reading: 5 FREE Min 🎁</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-2', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Psychic Love Clarity</h4><div id="l-cta-3-a" class="copy-text">❤️ Psychic Love Clarity: 5 FREE Mins</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-3-a', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Soulmate Reading</h4><div id="l-cta-3-b" class="copy-text">❤️ Soulmate Reading | 5 Mins Free</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-3-b', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Future Focus</h4><div id="l-cta-3-c" class="copy-text">❤️ Future of Love? | 5 Mins Free Reading</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-3-c', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Healing Focus</h4><div id="l-cta-3" class="copy-text">❤️ Healing Love Scars? Start with 5 FREE Mins.🩹</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-3', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Compatibility Check</h4><div id="l-cta-6" class="copy-text">❤️ Check Your Compatibility! 5 FREE Minute Reading. 🪐</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-6', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Clarity Request (Detailed)</h4><div id="l-cta-8" class="copy-text">❤️ Future of Love? Get Clarity! FREE 5 Min Psychic Love Reading! ✨</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-8', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Urgency</h4><div id="l-cta-4" class="copy-text">❤️ Have pressing love issues? Get expert clarity now! 5 FREE Minutes! ⏰</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-4', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Top Psychic Offer</h4><div id="l-cta-7" class="copy-text">❤️ Need answers to your biggest love questions? Talk to a Top Psychic, 5 MINS FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-7', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Confusion Focus</h4><div id="l-cta-5" class="copy-text">❤️ Confused about love? Stop guessing! Tap for a FREE 5 Min Reading.❓</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-5', this)">Copy</button></div>
+                <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Thoughts & Intentions Focus</h4><div id="l-cta-10" class="copy-text">❤️ What Is He/She Really Thinking? Get the True Intentions in 5 Mins FREE! 🤔</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-cta-10', this)">Copy</button></div>
+            </div>
+
+            <h3 id="love-short-desc" class="text-xl font-semibold mb-2 mt-8 text-pink-600 content-type-title">Short Description Ideas (Love)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (General Clarity)</h4>
+                <div id="l-desc-s-1" class="copy-text">Find clarity in any area—Love ❤️, Career 💼, or Spiritual Path—with top-rated psychics, mediums, and tarot readers on Mysticsense. Start your journey with 5 FREE minutes! ✨</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Risk-Free Guarantee)</h4>
+                <div id="l-desc-s-2" class="copy-text">Get guaranteed insight with Mysticsense! Get FIRST 5 minutes FREE! ✅ Choose from video, chat, or phone sessions from the Top Psychics. </div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Intuition Focus)</h4>
+                <div id="l-desc-s-3" class="copy-text">Uncover the unseen and tap into your intuition with a personalized psychic reading—book your session now for illuminating insights! 5 FREE Minutes! 🔮</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-s-3', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 4 (Future Questions / 24/7)</h4>
+                <div id="l-desc-s-4" class="copy-text">Get your future questions answered with Mysticsense! 💡 Enjoy your first 5 FREE minutes on a psychic reading via chat, video, or phone. Connect with trusted advisors 24/7!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-s-4', this)">Copy</button>
+            </div>
+
+
+            <h3 id="love-long-desc" class="text-xl font-semibold mb-2 mt-8 text-pink-600 content-type-title">Long Description (Love)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 1 (Specialized Techniques)</h4>
+                <div id="l-desc-l-1" class="copy-text">Need more than just general advice for your love issues? Mysticsense advisors are experts in powerful, specialized techniques! Connect with a reader who can use #Astrology to check your compatibility, read the #Tarot to map out your relationship's future path, or even tap into Mediumship for closure on past loves. Get a personalized reading based on the specific tools you trust—start exploring with your 5 FREE minutes now! 💖</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-l-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 2 (Healing Heartbreak)</h4>
+                <div id="l-desc-l-2" class="copy-text">Going through relationship turmoil or healing from heartbreak? 💔 Mysticsense offers more than predictions—it offers deep guidance and emotional clarity. Connect with an advisor specializing in #Love Readings and Energy Healing to uncover root issues, release emotional blocks, and attract the love you deserve. Whether you're navigating a breakup or seeking your soulmate, find the support you need, 24/7, via chat, phone, or video. Take your first step toward healing with 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('l-desc-l-2', this)">Copy</button>
+            </div>
+        </section>
+        
+        <!-- ========================================================================= -->
+        <!-- SECTION 3: CAREER & MONEY -->
+        <!-- ========================================================================= -->
+        <section id="career" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">💼 Career & Money</h2>
+            <p class="text-gray-600 mb-2">Focuses on professional decisions, financial forecasts, job changes, and identifying blockages to success.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Great around the start of the year (goal setting), during tax season, or when content focuses on job hunting, career growth, or investments.
+            </p>
+            
+            <h3 id="career-links" class="text-xl font-semibold mb-4 mt-8 text-yellow-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="c-link-1" class="link-text font-mono">https://www.mysticsense.com/Tarot/#a_aid=[REF_ID] (Tarot often covers career/finance)</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-link-1', this)">Copy Link</button>
+                </div>
+                <div class="link-container">
+                    <span id="c-link-2" class="link-text font-mono">https://www.mysticsense.com/Numerology/#a_aid=[REF_ID] (Numerology for timing/cycles)</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-link-2', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="career-titles" class="text-xl font-semibold mb-2 text-yellow-700 content-type-title">Short CTA - Titles Ideas (Career & Money)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Job Change Focus</h4><div id="c-cta-1" class="copy-text">⏰ Time to Change Jobs? Get Career Clarity (5 Mins FREE!)</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Financial Focus</h4><div id="c-cta-2" class="copy-text">💰 Money Insight: When Will Your Wealth Change? 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Decision Making</h4><div id="c-cta-3" class="copy-text">💼 Take the New Job? See the Outcome! 5 Mins FREE Reading.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Career Path Clarity</h4><div id="c-cta-4" class="copy-text">🧭 What's my career path? Find clarity now with 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Promotion Focus</h4><div id="c-cta-5" class="copy-text">📈 Will I get promoted? See your career future! 5 Mins FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-cta-5', this)">Copy</button></div>
+
+            <h3 id="career-short-desc" class="text-xl font-semibold mb-2 mt-8 text-yellow-700 content-type-title">Short Description Ideas (Career & Money)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (Clarity & Timing)</h4>
+                <div id="c-desc-s-1" class="copy-text">Need financial or career direction? 🧭 Get accurate guidance on job timing, money opportunities, and business decisions with top-rated advisors on Mysticsense. Start your reading with 5 FREE minutes! </div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Risk-Free Guidance)</h4>
+                <div id="c-desc-s-2" class="copy-text">Stop risking your future! 📈 Choose from finance and career psychics specializing in prediction accuracy. Get guaranteed insight into your next big career move. Your FIRST 5 minutes are FREE! ✅</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-desc-s-2', this)">Copy</button>
+            </div>
+
+            <h3 id="career-long-desc" class="text-xl font-semibold mb-2 mt-8 text-yellow-700 content-type-title">Long Description (Career & Money)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description (Detailed Financial & Career Focus)</h4>
+                <div id="c-desc-l-1" class="copy-text">Facing a professional crossroads or financial uncertainty? 💰 Mysticsense advisors provide actionable insights into your career path, investment decisions, and financial future. Our experts use tools like Tarot and Astrology to pinpoint the optimal time for job changes, promotions, or launching new projects. 
+
+Stop second-guessing your next move. Get the validated answers you need to move forward with confidence and achieve material success. Take the risk-free step toward clarity! New users are guaranteed 5 FREE minutes on their first reading. 💼
+#CareerPsychic #FinancialClarity #JobAdvice #MoneyForecast #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('c-desc-l-1', this)">Copy</button>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 4: MEDIUMSHIP & PET MEDIUM -->
+        <!-- ========================================================================= -->
+        <section id="mediumship" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">🔮 Mediumship & Pet Communication</h2>
+            <p class="text-gray-600 mb-2">Mediumship focuses on connecting with loved ones who have passed, offering closure, healing, and guidance. Pet Mediumship covers both living and passed animals.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Ideal around **Anniversaries of Loss**, **Memorial Day**, **End of the Year** (reflection), or when posting about grief, healing, or unusual pet behaviors.
+            </p>
+
+            <h3 id="mediumship-links" class="text-xl font-semibold mb-4 mt-8 text-indigo-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="m-link-1" class="link-text font-mono">https://www.mysticsense.com/Mediums/#a_aid=[REF_ID] (General Mediumship)</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-link-1', this)">Copy Link</button>
+                </div>
+                <div class="link-container">
+                    <span id="m-link-2" class="link-text font-mono">https://www.mysticsense.com/pet-medium-readings/#a_aid=[REF_ID] (Pet Communication)</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-link-2', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="mediumship-titles" class="text-xl font-semibold mb-2 text-indigo-700 content-type-title">Short CTA - Titles Ideas (Mediumship)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">General Mediumship</h4><div id="m-cta-1" class="copy-text">Test a Top Medium! Your 5 Minute Reading is FREE. 🕊️</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Peace/Closure Focus</h4><div id="m-cta-2" class="copy-text">Need Closure? Connect with a Medium (5 Mins FREE!) 🕯️</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Life Guidance Focus</h4><div id="m-cta-1-b" class="copy-text">✨ Life Guidance from the Other Side? Ask a Medium!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-cta-1-b', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Message from Loved One</h4><div id="m-cta-3" class="copy-text">A Message from Grandma? Connect with a Medium (5 Mins FREE)! 👵</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Specific Message Offer</h4><div id="m-cta-4" class="copy-text">Message from a Loved One? Get 5 FREE Minutes with a Medium!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-cta-4', this)">Copy</button></div>
+            
+            <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-700">Short CTA - Titles Ideas (Pet Medium)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Living Behavior</h4><div id="pm-cta-1" class="copy-text">Why is Fluffy doing that? 🐈 Get pet behavior clarity! 5 MINS FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Rainbow Bridge Message</h4><div id="pm-cta-2" class="copy-text">Missing your cat? 🌈 Get a message from the Rainbow Bridge (5 Mins FREE!)</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Pet Soulmate Focus</h4><div id="pm-cta-3" class="copy-text">❤️ Is your furry friend your soulmate? Connect with them! 5 Mins FREE Reading.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Dog Message</h4><div id="pm-cta-4" class="copy-text">🐶 Does Your Dog Have a Message? Find out with 5 FREE Minutes!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">General Pet Inquiry</h4><div id="pm-cta-5" class="copy-text">🤔 Wanna know what your pet thinks? Ask a Medium! 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-cta-5', this)">Copy</button></div>
+
+
+            <h3 id="mediumship-short-desc" class="text-xl font-semibold mb-2 mt-8 text-indigo-700 content-type-title">Short Description Ideas (Mediumship & Pets)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (Mediumship - Closure)</h4>
+                <div id="m-desc-s-1" class="copy-text">Find closure and comfort 🕊️ by connecting with verified Mediums, psychics, and intuitives on Mysticsense. Start your journey with 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Pet Communication - Living)</h4>
+                <div id="pm-desc-s-1" class="copy-text">Want to know what your cat or dog is really thinking? 🐾 Our expert Animal Communicators can bridge the gap! Find out if they're happy, need something, or just want to say "I love you." Start your session with 5 FREE minutes! </div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (General Mediumship - Curiosity)</h4>
+                <div id="m-desc-s-2" class="copy-text">Curious about the unseen? ✨ Sometimes, the best advice comes from the other side! Connect with a Top Medium 24/7 for guidance or a comforting sign. Start with your 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 4 (Mediumship - Peace of Mind)</h4>
+                <div id="m-desc-s-3" class="copy-text">Get guaranteed peace of mind with Mysticsense! Get your FIRST 5 minutes FREE! ✅ Connect via video, chat, or phone with Top-Rated Mediums who can bridge the gap.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-desc-s-3', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 5 (Pet Communication - Behavior/Health)</h4>
+                <div id="pm-desc-s-2" class="copy-text">Stop guessing about those strange dog behaviors or cat moods! 🐶 Get guaranteed clarity on your pet's health, happiness, and secrets. Choose from chat, video, or phone sessions with top-rated pet intuitives. Get your FIRST 5 minutes FREE! ✅</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 6 (Mediumship - Healing Grief)</h4>
+                <div id="m-desc-s-4" class="copy-text">Healing the pain of loss? 🩹 Uncover the unseen and tap into spiritual guidance with a personalized Medium reading. Book your session now for illuminating insights! 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-desc-s-4', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 7 (Pet/Spirit Guide Combo)</h4>
+                <div id="pm-desc-s-3" class="copy-text">Need to talk to your pet 🐕 or just get a thumbs-up from your spirit guide? Mysticsense Mediums use their expertise to bring through messages and spiritual guidance for any situation, big or small! Get FIRST 5 minutes FREE! ✅</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-desc-s-3', this)">Copy</button>
+            </div>
+
+            <h3 id="mediumship-long-desc" class="text-xl font-semibold mb-4 mt-8 text-indigo-700 content-type-title">Long Description (Mediumship - Healing Grief)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description (Grief/Loss Focus)</h4>
+                <div id="m-desc-l-1" class="copy-text">Looking for a sign? Need closure after a deep loss? 💔 Mysticsense advisors are experts in Mediumship and Spiritual Guidance. Our Mediums specialize in making connections to loved ones who have passed, offering deep comfort, validation, and personal messages. Whether you need healing from grief, guidance for your path, or simply want to know they are okay, Mysticsense offers more than predictions—it offers deep guidance and emotional clarity. Take your first step toward connection and healing with 5 FREE minutes! Find the support you need, 24/7, via chat, phone, or video.
+#Mediumship #PsychicMedium #SpiritualGuidance #Mysticsense #GriefHealing #MessagesFromTheOtherSide 🕯️</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('m-desc-l-1', this)">Copy</button>
+            </div>
+            
+            <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-700">Long Description (Pet Mediumship - Living/Passed)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description (Pet Communication Focus)</h4>
+                <div id="pm-desc-l-1" class="copy-text">The bond with your pet is unlike any other. 🐾 Mysticsense advisors are experts in Animal Communication and Pet Mediumship, helping you understand your furry, scaled, or feathered family member at the deepest level.
+
+For LIVING PETS: Get clarity on perplexing behavioral issues (like scratching furniture or excessive barking), understand their health needs, or simply strengthen your bond. 🐕 For PETS PASSED: Receive comforting messages, find closure, and gain validation that your beloved pet is at peace across the Rainbow Bridge. 🌈
+
+Mysticsense offers profound connection and answers for every pet parent. Take your first step toward clear understanding with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video.
+#AnimalCommunication #PetPsychic #PetBehavior #PetMedium #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pm-desc-l-1', this)">Copy</button>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 5: TAROT -->
+        <!-- ========================================================================= -->
+        <section id="tarot" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">⚖️ Tarot Readings</h2>
+            <p class="text-gray-600 mb-2">Focuses on forecasting, decision-making, and understanding current life cycles (Career, Finance, Relationships).</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Great for **New Moon** (fresh starts), **Full Moon** (release/closure), quarterly forecasts, or when discussing difficult decisions and path choices.
+            </p>
+            
+            <h3 id="tarot-links" class="text-xl font-semibold mb-4 mt-8 text-green-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="t-link-1" class="link-text font-mono">https://www.mysticsense.com/Tarot/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-link-1', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="tarot-titles" class="text-xl font-semibold mb-2 text-green-700 content-type-title">Short CTA - Titles Ideas (Tarot)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Forecasting Focus</h4><div id="t-cta-1" class="copy-text">❓ See Your Next 6 Months! FREE 5 Min Tarot Reading. 🔮</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Decision Focus</h4><div id="t-cta-2" class="copy-text">⚖️ Path A or Path B? Compare outcomes! 5 Mins FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Immediate Answer</h4><div id="t-cta-3" class="copy-text">❗ Need an immediate answer? Ask the Tarot (5 Mins Free!) ⏰</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Career Focus</h4><div id="t-cta-4" class="copy-text">💼 What's Next for Your Career? Get a Tarot Forecast! 🚀</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Life Path Unlock</h4><div id="t-cta-5" class="copy-text">🔓 Unlock Your Path! 5 FREE Minutes with a Tarot Expert</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-5', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Love Intentions Focus</h4><div id="t-cta-6" class="copy-text">❤️ What are their true intentions? Get 5 Mins FREE!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-6', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Relationship Planning</h4><div id="t-cta-7" class="copy-text">💍 Meet 'The One' soon? Get a 6-month forecast! 5 Mins</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-7', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Job Timing</h4><div id="t-cta-8" class="copy-text">💼 Time to change jobs? Get the answer now! 5 FREE Mins</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-8', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Financial Boost</h4><div id="t-cta-9" class="copy-text">💰 Boost your income? Financial clarity is FREE for 5 Mins!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-9', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Energy Check</h4><div id="t-cta-10" class="copy-text">✨ Energies for your project? Ask a Psychic! 5 FREE Mins.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-cta-10', this)">Copy</button></div>
+            
+            <h3 id="tarot-short-desc" class="text-xl font-semibold mb-2 mt-8 text-green-700 content-type-title">Short Description Ideas (Tarot)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (General Clarity)</h4>
+                <div id="t-desc-s-1" class="copy-text">Find clarity in any area of your life—Love ❤️, Career 💼, or personal path—with expert psychics, mediums, and tarot readers on Mysticsense. Start your journey with 5 FREE minutes! ✨</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Guaranteed Insight)</h4>
+                <div id="t-desc-s-2" class="copy-text">Stop guessing and start living with confidence! Mysticsense gives you guaranteed insight. Get your FIRST 5 minutes FREE! ✅ Choose from video, chat, or phone sessions with hundreds of vetted advisors.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Intuition & Unseen)</h4>
+                <div id="t-desc-s-3" class="copy-text">Unlock your intuition and uncover the unseen with a personalized psychic reading. Connect with trusted advisors 24/7 for illuminating insights on any topic! Book your session now for 5 FREE Minutes! 🔮</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-3', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 4 (Uncertainty Focus)</h4>
+                <div id="t-desc-s-4" class="copy-text">Tired of feeling uncertain about your next move? ❓ Get a detailed look at the energies surrounding your current situation with a professional Tarot reader on Mysticsense. Start your journey with 5 FREE minutes! </div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-4', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 5 (Future Insight)</h4>
+                <div id="t-desc-s-5" class="copy-text">Get guaranteed insight into your future! ✅ Choose from experienced Tarot readers for deep dives into Love, Career, or Finance via video, chat, or phone. Get your FIRST 5 minutes FREE!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-5', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 6 (Card Focus)</h4>
+                <div id="t-desc-s-6" class="copy-text">What card rules your day? 🃏 Uncover hidden obstacles and opportunities with a personalized three-card Tarot spread—book your session now for illuminating insights! 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-6', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 7 (24/7 Access)</h4>
+                <div id="t-desc-s-7" class="copy-text">Ready to stop guessing? 💡 Connect with trusted Tarot readers 24/7! See your immediate future laid out for you. Enjoy your first 5 FREE minutes on a Tarot reading via chat, video, or phone.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-s-7', this)">Copy</button>
+            </div>
+
+            <h3 id="tarot-long-desc" class="text-xl font-semibold mb-2 mt-8 text-green-700 content-type-title">Long Description (Tarot - Love & Intentions)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 1 (General Crossroads Focus)</h4>
+                <div id="t-desc-l-1-a" class="copy-text">Facing a crossroads? Need a clear, visual map of your potential future? Mysticsense advisors are experts in the powerful art of Tarot Card Reading. Our readers specialize in various spreads (Celtic Cross, Three-Card Spread, Career Forecasts) to give you detailed, structured guidance on the questions that matter most.
+
+Tarot is perfect for decoding complex situations. Whether you're struggling with a financial decision, trying to understand a new relationship dynamic, or just seeking validation for your path, Tarot offers clear road signs. Stop feeling lost and start navigating your life with confidence!
+Mysticsense offers reliable, visual insights. Take your first step toward clear foresight with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-l-1-a', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 2 (Love & Intentions Focus)</h4>
+                <div id="t-desc-l-1" class="copy-text">Stop analyzing and get the real answers! ❤️ Are you wondering "What are $X$'s true feelings/intentions toward me?" or "Will I meet 'The One' in the next six months?" Connect with a Top Tarot Reader on Mysticsense for a detailed, honest relationship forecast. Get the clarity you deserve! Start with your 5 FREE minutes! ✨</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-l-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 3 (Career & Decisions Focus)</h4>
+                <div id="t-desc-l-2" class="copy-text">Facing a major career or financial crossroads? 💼 Get a detailed forecast for your professional path. Our Tarot experts can help answer: "Is this the right time to change jobs?" or "What will be the outcome if I accept the new job offer?" Make your next move with confidence! Your FIRST 5 minutes are FREE! ✅</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-l-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 4 (Self-Growth and Blocks Focus)</h4>
+                <div id="t-desc-l-3" class="copy-text">Feeling stuck but not sure why? ❓ Tarot readings help uncover internal blocks and guide your energy. Ask a reader: "What blocks am I unconsciously creating?" or "What does the universe want me to focus on this month?" Stop guessing and start progressing on your life path! Connect 24/7 for 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('t-desc-l-3', this)">Copy</button>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 6: ASTROLOGY -->
+        <!-- ========================================================================= -->
+        <section id="astrology" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">🌌 Astrology Readings</h2>
+            <p class="text-gray-600 mb-2">Focus is on Personality Analysis, Transits, Compatibility, and Forecasting based on cosmic timing (Horoscopes, Birth Charts).</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Ideal around **Mercury Retrograde**, **New/Full Moons**, Solstices/Equinoxes, and at the start of a new **Zodiac Season**.
+            </p>
+            
+            <h3 id="astrology-links" class="text-xl font-semibold mb-4 mt-8 text-blue-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="a-link-1" class="link-text font-mono">https://www.mysticsense.com/Astrology-Readings/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-link-1', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="astrology-titles" class="text-xl font-semibold mb-2 text-blue-700 content-type-title">Short CTA - Titles Ideas (Astrology)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Personality/Zodiac</h4><div id="a-cta-1" class="copy-text">♑️ Your Zodiac Tells All! Get Your Astrology Reading (5 Mins FREE!) ✨</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Compatibility</h4><div id="a-cta-2" class="copy-text">❤️ Check Your Cosmic Match! Astrology Compatibility FREE for 5 Mins. 🪐</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Forecasting</h4><div id="a-cta-3" class="copy-text">🔭 What Are Your Stars Saying? Get a Transit Forecast (5 Mins FREE).</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Birth Chart</h4><div id="a-cta-4" class="copy-text">🗺️ Decode Your Birth Chart! Ask an Expert Astrologer!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Guidance</h4><div id="a-cta-5" class="copy-text">🧭 Navigate Life's Changes! Astrology Clarity (5 Mins FREE).</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-5', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">General Clarity Offer</h4><div id="a-cta-6" class="copy-text">❓ Life Questions? Get Clarity with 5 FREE Mins!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-cta-6', this)">Copy</button></div>
+
+
+            <h3 id="astrology-short-desc" class="text-xl font-semibold mb-2 mt-8 text-blue-700 content-type-title">Short Description Ideas (Astrology)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (Cosmic Forecast)</h4>
+                <div id="a-desc-s-1" class="copy-text">Ready for your personal cosmic forecast? 🌠 Find out how current planetary transits are affecting your Love, Career, and Destiny with expert Astrologers on Mysticsense. Start your journey with 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (True Self Insight)</h4>
+                <div id="a-desc-s-2" class="copy-text">Get guaranteed insight into your true self! ✅ Our Astrologers interpret your Sun, Moon, and Rising signs to reveal your core personality and life challenges. Get your FIRST 5 minutes FREE!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Timing & Planning)</h4>
+                <div id="a-desc-s-3" class="copy-text">Plan your life with the stars! 📅 Connect with trusted Astrologers 24/7! Find the best time to launch a business, start a relationship, or make a change. Enjoy your first 5 FREE minutes on an Astrology reading.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-desc-s-3', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 4 (Emotional/Retrograde Focus)</h4>
+                <div id="a-desc-s-4" class="copy-text">Feeling off? 🪐 Uncover how celestial events (like Mercury Retrograde!) affect your mood and fate with a personalized Astrology reading—get illuminating insights with 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-desc-s-4', this)">Copy</button>
+            </div>
+
+            <h3 id="astrology-long-desc" class="text-xl font-semibold mb-2 mt-8 text-blue-700 content-type-title">Long Description (Astrology - Birth Chart Focus)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description (Birth Chart & Timing)</h4>
+                <div id="a-desc-l-1" class="copy-text">Do you want to know yourself—and your future—on a deeper cosmic level? 🌠 Mysticsense advisors are experts in the powerful science of Astrology, interpreting your unique Birth Chart (Natal Chart) to give you profound, detailed insights. This chart is a map of the stars at the exact moment of your birth—revealing your greatest talents, relationship patterns, and life purpose.
+
+Astrology is essential for timing and compatibility. Whether you need a deep dive into Synastry (romantic compatibility), want to understand how a Full Moon is impacting your emotions, or need a forecast for the coming year, our readers provide profound, actionable insights. Take your first step toward clear foresight with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video. 🌍
+#AstrologyReading #BirthChart #ZodiacSigns #Compatibility #Horoscope #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('a-desc-l-1', this)">Copy</button>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 7: NUMEROLOGY -->
+        <!-- ========================================================================= -->
+        <section id="numerology" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">🔢 Numerology Readings</h2>
+            <p class="text-gray-600 mb-2">Focuses on Life Path, Destiny, Personal Year Forecasts, and Self-Discovery.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Ideal at the start of the Personal Year Cycle (calculated from birth date), the New Year, or when discussing Life Purpose and personal branding.
+            </p>
+
+            <h3 id="numerology-links" class="text-xl font-semibold mb-4 mt-8 text-purple-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="n-link-1" class="link-text font-mono">https://www.mysticsense.com/Numerology/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-link-1', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="numerology-titles" class="text-xl font-semibold mb-2 text-purple-700 content-type-title">Short CTA - Titles Ideas (Numerology)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Life Purpose Focus</h4><div id="n-cta-1" class="copy-text">❓ What is Your Life Path Number? Find out FREE for 5 Mins!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Forecasting</h4><div id="n-cta-2" class="copy-text">What Does Your Personal Year Hold? Get 5 FREE Minutes! ✅</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Self-Discovery</h4><div id="n-cta-3" class="copy-text">🔓 Unlock Your True Destiny! Numerology Reading (5 Mins FREE).</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Compatibility</h4><div id="n-cta-4" class="copy-text">❤️ Are You Compatible? Check Your Numbers! 5 Mins FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Big Questions</h4><div id="n-cta-5" class="copy-text">🤔 Who Are You Meant to Be? Ask a Numerologist!</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-cta-5', this)">Copy</button></div>
+            
+            <h3 id="numerology-short-desc" class="text-xl font-semibold mb-2 mt-8 text-purple-700 content-type-title">Short Description Ideas (Numerology)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (Unique Blueprint)</h4>
+                <div id="n-desc-s-1" class="copy-text">Ready to understand your unique blueprint? 🗺️ Find out your Life Path, Destiny, and Soul Urge numbers with expert Numerologists on Mysticsense. Start your journey with 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Potential Focus)</h4>
+                <div id="n-desc-s-2" class="copy-text">Get guaranteed insight into your personality and potential! ✅ Our Numerologists calculate your core numbers to reveal your strengths and challenges. Get your FIRST 5 minutes FREE!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Uncover Meaning)</h4>
+                <div id="n-desc-s-4" class="copy-text">Feeling like you're not living up to your potential? ❓ Uncover the hidden meanings in your birth date and name with a personalized Numerology reading—book your session now for deep self-understanding! 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-desc-s-4', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 4 (Timing & Cycles)</h4>
+                <div id="n-desc-s-3" class="copy-text">Plan your future with perfect timing! ⏰ Find out if this is an '8' Year for Finance or a '1' Year for New Beginnings! Enjoy your first 5 FREE minutes on a Numerology reading.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-desc-s-3', this)">Copy</button>
+            </div>
+
+            <h3 id="numerology-long-desc" class="text-xl font-semibold mb-2 mt-8 text-purple-700 content-type-title">Long Description (Numerology - Alignment Focus)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description (Personal Blueprint)</h4>
+                <div id="n-desc-l-1" class="copy-text">Do you wonder why certain numbers keep appearing in your life? ❓ Mysticsense advisors are experts in the ancient science of Numerology, using your birth date and name to calculate your core numbers. This is your personal blueprint—revealing your innate talents (Destiny Number), your life's greatest lesson (Life Path Number), and the energy of your current year (Personal Year Cycle).
+
+Numerology is perfect for aligning your life with your true purpose. Take your first step toward deep self-discovery with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video. ✨
+#Numerology #LifePathNumber #DestinyNumber #PersonalYear #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('n-desc-l-1', this)">Copy</button>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SECTION 8: PAST LIFE -->
+        <!-- ========================================================================= -->
+        <section id="pastlife" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">⏳ Past Life Readings</h2>
+            <p class="text-gray-600 mb-2">Focuses on uncovering hidden patterns, resolving lingering issues, and gaining profound insights into your current life’s purpose and relationships.</p>
+            <p class="timing-note">
+                📅 Ideal Timing: Ideal during periods of **emotional healing**, content related to **therapy/trauma recovery**, or when discussing **soulmate/twin flame connections**.
+            </p>
+            
+            <h3 id="pastlife-links" class="text-xl font-semibold mb-4 mt-8 text-orange-700 content-type-title">Recommended Affiliate Links</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <div class="link-container">
+                    <span id="pl-link-1" class="link-text font-mono">https://www.mysticsense.com/past-life-readings/#a_aid=[REF_ID]</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-link-1', this)">Copy Link</button>
+                </div>
+            </div>
+
+            <h3 id="pastlife-titles" class="text-xl font-semibold mb-2 text-orange-700 content-type-title">Short CTA - Titles Ideas (Past Life)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Shortest, most urgent text. Ideal for: Link-in-Bio/Linktree, SocialMedia, Bio, Story Stickers, Popups, Video/Reel Titles.</p>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Healing Patterns</h4><div id="pl-cta-1" class="copy-text">Stuck in a pattern? 🔁 Uncover the Past Life root (5 Mins FREE!)</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-cta-1', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Purpose/Destiny</h4><div id="pl-cta-2" class="copy-text">Uncover Your Soul’s Purpose! Past Life Insight FREE for 5 Mins. 🗝️</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-cta-2', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Self-Discovery</h4><div id="pl-cta-3" class="copy-text">🤔 Who Were You Before? Get a Past Life Reading (5 Mins FREE!)</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-cta-3', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Current Issues</h4><div id="pl-cta-4" class="copy-text">❓ Resolve Lingering Issues: Start a Past Life Reading (5 Mins FREE!)</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-cta-4', this)">Copy</button></div>
+            <div class="copy-item"><h4 class="text-md font-semibold mb-2 text-gray-700">Relationship Insight</h4><div id="pl-cta-5" class="copy-text">❤️ Past Life Connection? Understand soul ties! 5 Mins FREE.</div><button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-cta-5', this)">Copy</button></div>
+
+            <h3 id="pastlife-short-desc" class="text-xl font-semibold mb-2 mt-8 text-orange-700 content-type-title">Short Description Ideas (Past Life)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Primary caption text (1-3 lines). Ideal for: Standard Social Media Captions, Pinned Comments, Livestream Chats, Ad headlines/subheadings.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 1 (Hidden Patterns)</h4>
+                <div id="pl-desc-s-1" class="copy-text">Understand why you repeat the same mistakes! 🤔 Explore your previous incarnations with expert psychics on Mysticsense and gain profound self-understanding. Start your journey with 5 FREE minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-desc-s-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 2 (Lingering Issues)</h4>
+                <div id="pl-desc-s-2" class="copy-text">Need to resolve a deep, lingering issue? ✅ Past Life Readings uncover hidden patterns that influence your present reality, helping you navigate life with clarity. Get your FIRST 5 minutes FREE!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-desc-s-2', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Short Description 3 (Soul's Journey)</h4>
+                <div id="pl-desc-s-3" class="copy-text">Unlock your soul's entire journey! 💫 Find out how your past lives shape your current personality and relationships. Book your transformative session now for 5 FREE Minutes!</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-desc-s-3', this)">Copy</button>
+            </div>
+
+            <h3 id="pastlife-long-desc" class="text-xl font-semibold mb-2 mt-8 text-orange-700 content-type-title">Long Description (Past Life - Healing Focus)</h3>
+            <p class="text-sm text-gray-500 mb-4 font-bold border-l-2 pl-2 border-indigo-300">USAGE: Detailed, trust-building text. Use in: Detailed "About Me" sections, YouTube Video Descriptions, Blog Introductions/Sidebars.</p>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 1 (Healing Trauma & Patterns)</h4>
+                <div id="pl-desc-l-1" class="copy-text">Do you feel a deep, unexplained connection to certain places or people? 🌍 Mysticsense advisors are experts in Past Life Readings, providing a fascinating way to explore your soul's history. By delving into your previous incarnations, you can uncover hidden patterns, resolve lingering emotional issues, and gain profound insights into your current life's purpose.
+
+Past Life Readings are essential for healing generational or soul-level trauma. Take your first step toward deep self-healing with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video. 💖
+#PastLifeReading #SoulPurpose #KarmicDebt #HealingPatterns #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-desc-l-1', this)">Copy</button>
+            </div>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Long Description 2 (Detailed Soul Journey)</h4>
+                <div id="pl-desc-l-2" class="copy-text">The bond with your soul is eternal. If you are struggling with cycles of recurring bad luck or relationship problems, a Past Life Reading can be profoundly healing. Mysticsense advisors are experts in Past Life Regression to help you understand the core lesson of your current life.
+
+By understanding the impact of your past, you can make more informed decisions, break free from old cycles, and create a more fulfilling future. Mysticsense offers expert, transformative insights. Take your first step toward deep self-healing with 5 FREE minutes! Find the expert guidance you need, 24/7, via chat, phone, or video.
+#PastLifeReading #SoulPurpose #PastLifeRegresssion #KarmicDebt #HealingPatterns #Mysticsense</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('pl-desc-l-2', this)">Copy</button>
+            </div>
+        </section>
+        
+        <!-- ========================================================================= -->
+        <!-- SECTION 9: MEDIA ASSETS (NEW SECTION) -->
+        <!-- ========================================================================= -->
+        <section id="media-assets" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">🎬 Media Assets (Videos & Logos)</h2>
+            <p class="text-gray-600 mb-4">Access raw assets for use in social media posts, stories, and affiliate websites.</p>
+            
+            <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-700">Video Content Folder</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Google Drive: Videos for Social Media</h4>
+                <div class="link-container">
+                    <span id="asset-video-link" class="link-text font-mono">https://drive.google.com/drive/folders/1_8he6TnNR6VvaoBJugMdtl7jCooYzbQL?usp=drive_link</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('asset-video-link', this)">Copy Link</button>
+                    <a href="https://drive.google.com/drive/folders/1_8he6TnNR6VvaoBJugMdtl7jCooYzbQL?usp=drive_link" class="access-btn ml-4" target="_blank">Access Videos</a>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4 text-indigo-700">Logo and Brand Assets Folder</h3>
+            <div class="copy-item bg-gray-50 p-4">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Google Drive: Logos & Branding</h4>
+                <div class="link-container">
+                    <span id="asset-logo-link" class="link-text font-mono">https://drive.google.com/drive/folders/1BfgSfr7uT4mj00FwKTUgiHG0UgdoiI-0?usp=drive_link</span>
+                    <button class="copy-btn py-1.5 px-3 rounded transition duration-150" onclick="copyContent('asset-logo-link', this)">Copy Link</button>
+                    <a href="https://drive.google.com/drive/folders/1BfgSfr7uT4mj00FwKTUgiHG0UgdoiI-0?usp=drive_link" class="access-btn ml-4" target="_blank">Access Logos</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================================= -->
+        <!-- SECTION 10: ABOUT MYSTICSENSE (General Info) -->
+        <!-- ========================================================================= -->
+        <section id="about" class="content-section-title">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 pb-2">ℹ️ About Mysticsense Description</h2>
+
+            <h3 id="about-desc" class="text-xl font-semibold mb-4 text-gray-700 content-type-title">General Platform Summary</h3>
+            <div class="copy-item">
+                <h4 class="text-md font-semibold mb-2 text-gray-700">Detailed About Description</h4>
+                <div id="about-desc-1" class="copy-text">Mysticsense is an online platform that provides real-time psychic readings and advice. Connect with a variety of top and reviewed advisors, including psychics, mediums, and tarot readers, 24/7 through chat, video, or phone sessions.
+Key Offerings & Features:
+Welcome Offer: New users and first-time callers are guaranteed 5 minutes free on their first reading. If they are not happy with the reading they can ask for a full refund.
+Readings: Expert guidance in tarot, Medium, astrology, and general psychic insight.
+Specialties: Focus on areas like Love Psychics, Career Psychics, and Crystals Guide.</div>
+                <button class="copy-btn mt-3 text-white font-bold py-1.5 px-3 rounded transition duration-150" onclick="copyContent('about-desc-1', this)">Copy</button>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ========================================================================= -->
+    <!-- JAVASCRIPT FOR COPY FUNCTIONALITY & NAVIGATION -->
+    <!-- ========================================================================= -->
+    <script>
+        // --- 1. COPY FUNCTIONALITY ---
+        function copyContent(elementId, buttonElement) {
+            const textElement = document.getElementById(elementId);
+            // Use innerText to get clean, displayed text
+            const textToCopy = textElement.innerText;
+            
+            // Attempt to use modern Clipboard API
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Success feedback
+                const originalText = buttonElement.innerText;
+                buttonElement.innerText = '✅ COPIED!';
+                buttonElement.classList.remove('bg-indigo-600');
+                buttonElement.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    buttonElement.innerText = originalText;
+                    buttonElement.classList.remove('bg-green-500');
+                    buttonElement.classList.add('bg-indigo-600');
+                }, 1500);
+            }).catch(err => {
+                // Fallback (handles the expected JS blocking issue in restricted environments)
+                console.error('Copy failed (JS may be blocked):', err);
+                
+                // Use execCommand as a secondary fallback if the primary API fails
+                try {
+                    const range = document.createRange();
+                    range.selectNodeContents(textElement);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(range);
+                    document.execCommand('copy');
+                    window.getSelection().removeAllRanges();
+                    
+                    const originalText = buttonElement.innerText;
+                    buttonElement.innerText = '✅ COPIED!';
+                    buttonElement.classList.remove('bg-indigo-600');
+                    buttonElement.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        buttonElement.innerText = originalText;
+                        buttonElement.classList.remove('bg-green-500');
+                        buttonElement.classList.add('bg-indigo-600');
+                    }, 1500);
+
+                } catch (fallbackError) {
+                    // Final fallback alert if both APIs fail
+                    alert('Automatic copy failed! Please manually select the text from the box and copy (Ctrl+C / Cmd+C).');
+                }
+            });
+        }
+
+        // --- 2. URL PARAMETER INJECTION (For automatic Ref ID population) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Attempt to read the ID from the URL hash fragment first
+            let refId = window.location.hash.substring(1); // Remove leading '#'
+
+            // If the hash contains typical affiliate params, extract the value
+            if (refId.startsWith('a_aid=')) {
+                refId = refId.replace('a_aid=', '');
+            } else if (refId.startsWith('refid=')) {
+                refId = refId.replace('refid=', '');
+            } else if (refId) {
+                // If the hash is simple (e.g., #andy), use the hash directly as the ID
+                // refId remains the value of the hash fragment
+            }
+            
+            // Fallback: Check standard query parameters if hash is empty or unformatted
+            if (!refId) {
+                if (urlParams.has('refid')) {
+                    refId = urlParams.get('refid');
+                } else if (urlParams.has('a_aid')) {
+                    refId = urlParams.get('a_aid');
+                } else if (urlParams.has('id')) {
+                    refId = urlParams.get('id');
+                }
+            }
+
+            if (refId) {
+                // Find all link-text elements and replace the placeholder
+                document.querySelectorAll('.link-text').forEach(linkElement => {
+                    linkElement.innerText = linkElement.innerText.replace('[REF_ID]', refId);
+                });
+            } else {
+                // If no ID is found, inform the user they need to add it manually to the URL
+                console.warn("No affiliate ID found in URL. Links contain the placeholder [REF_ID].");
+            }
+        });
+
+        // --- 3. NAVIGATION HIGHLIGHTING & TOGGLE LOGIC (for collapse/expand) ---
+        
+        // Navigation toggle function
+        function toggleNav(event, targetId) {
+            
+            const nestedNav = document.getElementById(targetId);
+            const toggleBtn = event.currentTarget.querySelector('.nav-toggle-btn');
+            
+            // 1. Handle the toggle state change
+             if (nestedNav.classList.contains('expanded')) {
+                 // If it's open, collapse it
+                 nestedNav.classList.remove('expanded');
+                 if (toggleBtn) toggleBtn.classList.remove('rotated');
+             } else {
+                 // If it's closed, expand it
+                 nestedNav.classList.add('expanded');
+                 if (toggleBtn) toggleBtn.classList.add('rotated');
+             }
+             // NOTE: The click event is not blocked (no preventDefault), so the anchor scrolls automatically.
+        }
+        window.toggleNav = toggleNav; // Expose to global scope for onclick attributes
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section, .content-type-title'); 
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const offset = 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - offset; 
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize first link as active on load
+        document.addEventListener('DOMContentLoaded', () => {
+             // Activate the first top-level link on load
+            const firstLink = document.querySelector('#nav-links > div > .nav-link');
+            if (firstLink) {
+                firstLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
